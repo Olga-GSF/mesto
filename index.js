@@ -6,6 +6,7 @@ const subtitleElement = document.querySelector('.profile__subtitle')
 const nameFieldElement = document.querySelector('.popup__input_name')
 const descriptionFieldElement = document.querySelector('.popup__input_description')
 const formElement = document.querySelector('.popup__form')
+/*const likedElement = document.querySelector('.button_type_like')*/
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_isOpen')
@@ -13,6 +14,10 @@ function openPopup(popupElement) {
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_isOpen')
+}
+
+function liked(likedElement) {
+  likedElement.classList.add('botton_type_active')
 }
 
 editButton.addEventListener('click', function () {
@@ -33,3 +38,7 @@ formElement.addEventListener('submit', function (event) {
   subtitleElement.textContent = descriptionFieldElement.value;
   closePopup(popup)
 })
+
+/*likedElement.addEventListener('click', function () {
+  likedElement.style = 'background-image: url(../../../images/UnionHeartLike.svg)';
+})*/
