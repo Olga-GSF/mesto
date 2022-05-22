@@ -1,0 +1,25 @@
+.button_type_edit {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #FFFFFF;
+  border-radius: 2px;
+  background-color: #000000;
+  background-image: url(../../../images/VectorPen.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 42px 0 16px;
+  transition: opacity 0.1s ease-out;
+}
+
+.button_type_edit:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 424px) {
+  .button_type_edit {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    align-self: center;
+  }
+}

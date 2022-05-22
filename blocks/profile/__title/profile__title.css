@@ -3,4 +3,19 @@
   font-size: 42px;
   line-height: 1.1;
   color: #FFFFFF;
+  margin-right: 18px;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 424px) {
+  .profile__title {
+    max-width: 189px;
+    min-height: 26px;
+    font-size: 27px;
+    text-align: center;
+    margin: 0 10px 0 0;
+  }
 }
