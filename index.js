@@ -16,9 +16,9 @@ function closePopup(popupElement) {
   popupElement.classList.remove('popup_isOpen')
 }
 
-function liked(likedElement) {
+/*function liked(likedElement) {
   likedElement.classList.add('botton_type_active')
-}
+}*/
 
 editButton.addEventListener('click', function () {
   openPopup(popup)
