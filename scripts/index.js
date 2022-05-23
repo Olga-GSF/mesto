@@ -18,11 +18,19 @@ function closePopup(popup) {
   popup.classList.remove('popup__is-open')
 }
 
+function preventDefault(event) {
+  event.preventDefault()
+  titleElement.textContent = nameFieldElement.value;
+  subtitleElement.textContent = descriptionFieldElement.value;
+}
+
 /*function liked(likedElement) {
   likedElement.classList.add('botton_type_active')
 }*/
 
-editButton.addEventListener('click', openPopup(popup))
+editButton.addEventListener('click', function () {
+  openPopup(popup)
+})
 
 closePopupButton.addEventListener('click', function () {
   closePopup(popup)
@@ -30,8 +38,6 @@ closePopupButton.addEventListener('click', function () {
 
 formElement.addEventListener('submit', function (event) {
   event.preventDefault()
-  titleElement.textContent = nameFieldElement.value;
-  subtitleElement.textContent = descriptionFieldElement.value;
   closePopup(popup)
 })
 
