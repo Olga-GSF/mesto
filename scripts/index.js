@@ -18,10 +18,11 @@ function closePopup(popup) {
   popup.classList.remove('popup__is-open')
 }
 
-function preventDefault(event) {
+function formEdit(event) {
   event.preventDefault()
   titleElement.textContent = nameFieldElement.value;
   subtitleElement.textContent = descriptionFieldElement.value;
+  closePopup(popup)
 }
 
 /*function liked(likedElement) {
@@ -36,10 +37,7 @@ closePopupButton.addEventListener('click', function () {
   closePopup(popup)
 })
 
-formElement.addEventListener('submit', function (event) {
-  event.preventDefault()
-  closePopup(popup)
-})
+formElement.addEventListener('submit', formEdit)
 
 /*likedElement.addEventListener('click', function () {
   likedElement.style = 'background-image: url(../../../images/UnionHeartLike.svg)';
