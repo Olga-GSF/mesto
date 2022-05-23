@@ -8,23 +8,21 @@ const descriptionFieldElement = document.querySelector('.popup__input_name_descr
 const formElement = document.querySelector('.popup__form')
 /*const likedElement = document.querySelector('.button_type_like')*/
 
-function openPopup(popupElement) {
-  popupElement.classList.add('popup__is-open')
+function openPopup(popup) {
+  popup.classList.add('popup__is-open')
   nameFieldElement.value = titleElement.textContent;
   descriptionFieldElement.value = subtitleElement.textContent;
 }
 
-function closePopup(popupElement) {
-  popupElement.classList.remove('popup__is-open')
+function closePopup(popup) {
+  popup.classList.remove('popup__is-open')
 }
 
 /*function liked(likedElement) {
   likedElement.classList.add('botton_type_active')
 }*/
 
-editButton.addEventListener('click', function () {
-  openPopup(popup)
-})
+editButton.addEventListener('click', openPopup(popup))
 
 closePopupButton.addEventListener('click', function () {
   closePopup(popup)
