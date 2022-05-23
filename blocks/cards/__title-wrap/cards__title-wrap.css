@@ -6,4 +6,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 25px auto 31px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

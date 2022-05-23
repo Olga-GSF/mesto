@@ -1,4 +1,4 @@
-.popup__input {
+.popup__input_name_description {
   max-width: 358px;
   min-height: 27px;
   border-style: none;
@@ -6,11 +6,10 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.1;
-  outline:none;
   }
 
   @media screen and (max-width: 424px) {
-    .popup__input {
+    .popup__input_name_description {
       max-width: 238px;
     }
   }

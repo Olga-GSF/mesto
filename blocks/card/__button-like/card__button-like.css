@@ -1,19 +1,20 @@
-.button_type_like {
+.card__button-like {
   width: 22px;
   height: 19px;
   background-image: url(../../../images/VectorHeart.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
   border: none;
   background-size: contain;
   transition: opacity 0.1s ease-out;
 }
 
-.button_type_like:hover {
+.card__button-like:hover {
   opacity: 0.5;
 }
 
-/*.button_type_like:active {
+/*.card__button-like:active {
   background-image: url(../../../images/UnionHeartLike.svg);
   background-repeat: no-repeat;
   background-position: center;

@@ -13,9 +13,21 @@
   margin: 0;
 }
 
+@media screen and (max-width: 1023px) {
+  .cards__items {
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .cards__items {
+    max-width: 282px;
+  }
+}
+
   @media screen and (max-width: 424px) {
     .cards__items {
       max-width: 282px;
-      row-gap: 20px;
+      min-height: 2268px;
     }
   }
