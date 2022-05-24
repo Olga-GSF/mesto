@@ -29,13 +29,9 @@ function formEdit(event) {
   likedElement.classList.add('botton_type_active')
 }*/
 
-editButton.addEventListener('click', function () {
-  openPopup(popup)
-})
+editButton.addEventListener('click', () => openPopup(popup))
 
-closePopupButton.addEventListener('click', function () {
-  closePopup(popup)
-})
+closePopupButton.addEventListener('click', () => closePopup(popup))
 
 formElement.addEventListener('submit', formEdit)
 
