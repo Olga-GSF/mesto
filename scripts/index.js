@@ -9,13 +9,13 @@ const formElement = document.querySelector('.popup__form')
 /*const likedElement = document.querySelector('.button_type_like')*/
 
 function openPopup(popup) {
-  popup.classList.add('popup__is-open')
+  popup.classList.add('popup_is-open')
   nameFieldElement.value = titleElement.textContent;
   descriptionFieldElement.value = subtitleElement.textContent;
 }
 
 function closePopup(popup) {
-  popup.classList.remove('popup__is-open')
+  popup.classList.remove('popup_is-open')
 }
 
 function formEdit(event) {
