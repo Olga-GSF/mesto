@@ -26,15 +26,19 @@ const initialCards = [
 ];
 
 const editButton = document.querySelector('.profile__button-edit')
+
 const popup = document.querySelector('.popup')
 const popupEdit = document.querySelector('.popup_type_edit-profile')
 const popupAdd = document.querySelector('.popup_type_add-card')
 const popupImage = document.querySelector('popup_type_big-image')
+
 const closePopupButton = document.querySelector('.popup__button-close')
 const addButton = document.querySelector('.profile__button-add')
 const deleteButton = document.querySelector('.card__button-delete')
+
 const likeButton = document.querySelector('.card__button-like')
 const likedElement = document.querySelector('.card__button-like')
+
 const titleElement = document.querySelector('.profile__title')
 const subtitleElement = document.querySelector('.profile__subtitle')
 const nameFieldElement = document.querySelector('.popup__input_name_firstname')
