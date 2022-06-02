@@ -26,58 +26,20 @@
         </div>
         <button aria-label="add" class="button profile__button-add"></button>
       </section>
+
       <section class="cards center">
         <ul class="cards__items">
-          <li class="card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="карачаево" class="card__image">
-            <div class="card__title-wrap">
-              <h2 class="card__title">Карачаевск</h2>
-              <button type="button" class="button card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="гора эльбрус" class="card__image">
-            <div class="card__title-wrap">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="button card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="домбай" class="card__image">
-            <div class="card__title-wrap">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="button card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="гора эльбрус" class="card__image">
-            <div class="card__title-wrap">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="button card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="домбай" class="card__image">
-            <div class="card__title-wrap">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="button card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="карачаево" class="card__image">
-            <div class="card__title-wrap">
-              <h2 class="card__title">Карачаево-Черкессия</h2>
-              <button type="button" class="button card__button-like"></button>
-            </div>
-          </li>
+
         </ul>
       </section>
+
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
+
+    <div class="popup popup_type_edit-profile">
       <div class="popup__content">
         <button aria-label="close" type="button" class="button popup__button-close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
@@ -89,7 +51,40 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup_type_add-card">
+      <div class="popup__content">
+        <button aria-label="close" type="button" class="button popup__button-close"></button>
+        <h3 class="popup__title">Новое место</h3>
+        <form name="info" action="submit" class="popup__form">
+          <input name="name" type="text" class="popup__input popup__input_name_firstname" placeholder="Название">
+          <input name="description" type="text" class="popup__input popup__input_name_description"
+            placeholder="Ссылка на картинку">
+          <button type="submit" class="button popup__button-submit">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_big-image">
+      <figure>
+        <a href="#"><img src="#" alt="место" class="popup__image"></a>
+        <figcaption></figcaption>
+      </figure>
+      <button aria-label="close" type="button" class="button popup__button-close"></button>
+    </div>
   </div>
+
+  <template id="card-template">
+    <div class="card">
+      <img src="#" alt="картинка" class="card__image">
+      <button type="button" class="button card__button-delete"></button>
+      <div class="card__title-wrap">
+        <h2 class="card__title"></h2>
+        <button type="button" class="button card__button-like"></button>
+      </div>
+    </div>
+  </template>
+
   <script src="./scripts/index.js"></script>
 </body>
 
