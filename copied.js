@@ -45,13 +45,27 @@ function openPopup(popup) {
     descriptionFieldElement.value = subtitleElement.textContent;
   }
 }
+
+// function closePopup(popup) {
+//   if (popupEdit) {
+//     popup.classList.add('popup_type_edit-profile')
+//     popup.classList.remove('popup_is-open')
+//   } else if (popupAdd) {
+//     popup.classList.add('popup_type_add-card')
+//     popup.classList.remove('popup_is-open')
+//   } else if (popupImage) {
+//     popup.classList.add('popup_type_big-image')
+//     popup.classList.remove('popup_is-open')
+//   }
+// }
+
 /*const likedElement = document.querySelector('.card__button-like')*/
 
-/*function openPopup(popupEdit) {
+function openPopup(popupEdit) {
   popupEdit.classList.add('popup_is-open')
   nameFieldElement.value = titleElement.textContent;
   descriptionFieldElement.value = subtitleElement.textContent;
-}*/
+}
 
 function closePopup(popup) {
   popup.classList.remove('popup_is-open')
@@ -62,3 +76,23 @@ function formEdit(event) {
   subtitleElement.textContent = descriptionFieldElement.value;
   closePopup(popup)
 }
+
+const editTask = el => {
+  const todoItem = todoTemplate.content;
+  const todoEl = todoItem.querySelector('.list__item').cloneNode(true);
+  const todoText = todoEl.querySelector('.list__item-text');
+  todoText.textContent = el;
+  todoEl.querySelector('.list__item-delete-button').addEventListener('click', (evt) => {
+    const item = evt.target.closest('.list__item');
+    const remove = () => {
+      item.remove();
+    };
+    const translate = () => {
+      item.classList.add('todo__deleting-animation');
+    };
+    translate();
+    item.addEventListener('transitionend', () => {
+      if (item.classList.contains('todo__deleting-animation') === true) {
+        remove(item);
+      };
+    });
