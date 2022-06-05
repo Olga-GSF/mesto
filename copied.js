@@ -76,23 +76,174 @@ function formEdit(event) {
   subtitleElement.textContent = descriptionFieldElement.value;
   closePopup(popup)
 }
+// function openPopup(popup) {
+//   if (popupEdit) {
+//     popup.classList.add('popup_type_edit-profile')
+//     popup.classList.add('popup_is-open')
+//     nameFieldElement.value = titleElement.textContent;
+//     descriptionFieldElement.value = subtitleElement.textContent;
+//   } else if (popupAdd) {
+//     popup.classList.add('popup_type_add-card')
+//     popup.classList.add('popup_is-open')
+//     nameFieldElement.value = titleElement.textContent;
+//     descriptionFieldElement.value = subtitleElement.textContent;
+//   } else if (popupImage) {
+//     popup.classList.add('popup_type_big-image')
+//     popup.classList.add('popup_is-open')
+//   }
+// }
 
-const editTask = el => {
-  const todoItem = todoTemplate.content;
-  const todoEl = todoItem.querySelector('.list__item').cloneNode(true);
-  const todoText = todoEl.querySelector('.list__item-text');
-  todoText.textContent = el;
-  todoEl.querySelector('.list__item-delete-button').addEventListener('click', (evt) => {
-    const item = evt.target.closest('.list__item');
-    const remove = () => {
-      item.remove();
-    };
-    const translate = () => {
-      item.classList.add('todo__deleting-animation');
-    };
-    translate();
-    item.addEventListener('transitionend', () => {
-      if (item.classList.contains('todo__deleting-animation') === true) {
-        remove(item);
-      };
+function liked(likeElement) {
+  likeElement.classList.add('button_is-active');
+}
+likeElement.addEventListener('click', function (evt)) {
+  liked();
+};
+
+// function liked(evt) {
+//     evt.target.classList.toggle('button_is-active');
+// };
+
+
+const likeElements = document.querySelector('.card__button-like');
+likeElements.forEach(function (item) {
+  item.addEventListener('click', liked(evt))
+});
+
+const popups = [
+  {
+    name: "edit-profile",
+  },
+  {
+    name: "add-card",
+  },
+  {
+    name: "big-image",
+  }
+]
+
+//const container = document.querySelector('.container');
+
+const openPopup = (name) => {
+  const popupType = document.querySelector(`.popup_type_${name}`);
+  popupType.classList.add('popup_is-open');
+  closePopupButton.addEventListener('click', closePopup);
+  console.log(openPopup);
+}
+const closePopup = (evt) => {
+  evt.target('.popup').classList.remove('popup_is-open');
+  evt.target.removeEventListener('click', closePopup);
+
+  const addCard = function (event) {
+    event.preventDefault();
+    const form = document.forms.new;
+    const name = form.elements.name.value;
+    const link = form.elements.link.value;
+    Card(name, link);
+    popup.classList.remove('popup_is-opened');
+    form.reset();
+  };
+
+  // const addCard = element => {
+  //   const card = createCard(element);
+  //   cardsItemsElement.insertAdjacentHTML('afterbegin', card)
+  //   initialCards.forEach(addCard);
+  // };
+
+
+  // cardElement.querySelector('.card__button-like').addEventListener('click', evt => {
+  //   const card = getLikeByEvent(evt);
+  //   const likeElement = document.querySelector('.card__button-like')
+  //   likeElement.classList.add('button_is-active');
+  // });
+
+  function createCard(image, title) {
+
+    const cardTemplate = document.querySelector('#card-template').content;
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+    const cardImg = cardElement.querySelector('.card__image');
+    cardImg.src = image;
+    cardImg.alt = title;
+    cardElement.querySelector('.card__title').textContent = title;
+
+    cardElement.querySelector('.card__button-like').addEventListener('click', likeCard);
+
+    cardElement.querySelector('.card__button-delete').addEventListener('click', evt => {
+      const card = getCardByEvent(evt);
+      card.remove();
     });
+
+    cardImage.addEventListener('click', () => bigImage(cardImg));
+    return cardElement;
+
+    cardsItemsElement.prepend(cardElement);
+  };
+  initialCards.forEach((cardItem) => {
+    const card = addCard(cardItem.link, cardItem.name);
+    renderCard(card);
+  });
+
+
+  function likeCard(evt) {
+    evt.target.classList.toggle('.button_is-active');
+  };
+
+  // function createCard(element) {
+  //   const cardTemplate = document.querySelector('#card-template').content;
+  //   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  //   const bigImage = cardElement.querySelector('.card__image');
+  //   bigImage.src = element.src;
+
+  //   cardElement.querySelector('.card__image').src = element.link;
+  //   cardElement.querySelector('.card__title').textContent = element.name;
+
+  //   const likeElement = cardElement.querySelector('.card__button-like');
+  //   likeElement.addEventListener('click', () => {
+  //     likeElement.classList.toggle('.button_is-active');
+  //   });
+
+  //   cardElement.querySelector('.card__button-delete').addEventListener('click', evt => {
+  //     const card = getCardByEvent(evt);
+  //     card.remove();
+  //   });
+
+  //   cardsItemsElement.prepend(cardElement);
+  // }
+  // initialCards.forEach(createCard);
+
+  function createCard(image, title) {
+    const cardTemplate = document.querySelector('#card-template').content;
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+    const cardImg = cardElement.querySelector('.card__image');
+    cardImg.src = image;
+    cardImg.alt = title;
+    cardElement.querySelector('.card__title').textContent = title;
+
+    cardElement.querySelector('.card__button-like').addEventListener('click', likeCard);
+
+    cardElement.querySelector('.card__button-delete').addEventListener('click', evt => {
+      const card = getCardByEvent(evt);
+      card.remove();
+    });
+
+    cardImage.addEventListener('click', () => bigImage(cardImg));
+    return cardElement;
+
+  };
+  initialCards.forEach((cardItem) => {
+    const card = addCard(cardItem.link, cardItem.name);
+    renderCard(card);
+  });
+
+  // function bigImage(element) {
+//   formImg.src = element.src;
+//   formImg.alt = element.alt;
+//   formImgTitle.textContent = element.alt;
+// };
+
+// popupImage.addEventListener('click', () => bigImage(popupImage));
+// function bigImage(element) {
+//   openPopup(popupForScaleImg);
+//   bigImage.src = element.src;
+//   popupImageTitle.textContent = element.text;
+// };

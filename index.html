@@ -54,33 +54,34 @@
 
     <div class="popup popup_type_add-card">
       <div class="popup__content">
-        <button aria-label="close" type="button" class="button popup__button-close"></button>
+        <button aria-label="close" type="button" class="button popup__button-close_place_add"></button>
         <h3 class="popup__title">Новое место</h3>
-        <form name="info" action="submit" class="popup__form">
-          <input name="name" type="text" class="popup__input popup__input_name_firstname" placeholder="Название">
-          <input name="description" type="text" class="popup__input popup__input_name_description"
-            placeholder="Ссылка на картинку">
+        <form name="info" action="submit" class="popup__form_place_add">
+          <input name="name" type="text" class="popup__input popup__input_name_place" placeholder="Название">
+          <input name="link" type="text" class="popup__input popup__input_name_link" placeholder="Ссылка на картинку">
           <button type="submit" class="button popup__button-submit">Создать</button>
         </form>
       </div>
     </div>
 
     <div class="popup popup_type_big-image">
-      <figure>
-        <a href="#"><img src="#" alt="место" class="popup__image"></a>
-        <figcaption></figcaption>
-      </figure>
-      <button aria-label="close" type="button" class="button popup__button-close"></button>
+      <div class="popup__content">
+        <figure class="popup__image-container">
+          <img src="#" alt="место" class="popup__big-image">
+          <figcaption class="popup__image-title"></figcaption>
+        </figure>
+        <button aria-label="close" type="button" class="button popup__button-close_place_image"></button>
+      </div>
     </div>
   </div>
 
   <template id="card-template">
     <div class="card">
       <img src="#" alt="картинка" class="card__image">
-      <button type="button" class="button card__button-delete"></button>
+      <button type="button" aria-label="del" class="button card__button-delete"></button>
       <div class="card__title-wrap">
         <h2 class="card__title"></h2>
-        <button type="button" class="button card__button-like"></button>
+        <button type="button" aria-label="like" class="button card__button-like"></button>
       </div>
     </div>
   </template>
