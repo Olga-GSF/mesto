@@ -70,17 +70,18 @@ function formEdit(event) {
 
 function formAdd(evt) {
   evt.preventDefault()
-  const card = {
+  const cardNew = {
     name: nameAddFieldElement.value,
     link: linkFieldElement.value
   };
-  createCard(card);
+  createCard(cardNew);
   closePopup(popupAdd);
 };
 
 editButton.addEventListener('click', () => openPopup(popup));
 closePopupButton.addEventListener('click', () => closePopup(popup));
 closePopupAddButton.addEventListener('click', () => closePopup(popupAdd));
+closePopupImageButton.addEventListener('click', () => closePopup(popupImage));
 addButton.addEventListener('click', () => openPopup(popupAdd));
 formElement.addEventListener('submit', formEdit);
 formElementAdd.addEventListener('submit', formAdd);
@@ -89,9 +90,21 @@ function liked(evt) {
   evt.target.classList.toggle('button_is-active');
 };
 
+function openCard(evt) {
+  console.log(evt.querySelector('.card__image').src);
+  console.log(evt.target.closest('.card__image'));
+}
+function liked(evt) {
+  evt.target.classList.toggle('button_is-active');
+};
+
+const popupImage = document.querySelector('.popup_type_big-image')
+
 function createCard(element) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const bigImage = cardElement.querySelector('.card__image');
+  bigImage.addEventListener('click', evt => openCard(evt.target.closest('.card')));
 
   cardElement.querySelector('.card__image').src = element.link;
   cardElement.querySelector('.card__title').textContent = element.name;
@@ -104,14 +117,16 @@ function createCard(element) {
   });
 
   cardsItemsElement.prepend(cardElement);
+
 }
 initialCards.forEach(createCard);
 
+// function openCard(name, link) {
+//   const popupImageTitle = document.querySelector('.popup__image-title').textContent;
+//   const popupImageLink = document.querySelector('.card__image').src;
+//   const bigImage = document.querySelector('.card__image');
+//   bigImage.addEventListener('click', () => openPopup(popupImage));
+// }
 
-const popupImage = document.querySelector('.popup_type_big-image')
-const popupImageTitle = document.querySelector('.popup__image-title');
-const bigImage = document.querySelector('.card__image')
-
-bigImage.addEventListener('click', () => openPopup(popupImage));
-
-closePopupImageButton.addEventListener('click', () => closePopup(popupImage));
+// const openCardByEvent = evt => evt.currentTarget.closest('.card__image');
+// popupImage.querySelector('.card__image').alt = event.querySelector('.card__image').alt;

@@ -247,3 +247,33 @@ const closePopup = (evt) => {
 //   bigImage.src = element.src;
 //   popupImageTitle.textContent = element.text;
 // };
+
+
+Рабочий вариант, но открывается пустая карточка.После formElementAdd
+
+  function liked(evt) {
+    evt.target.classList.toggle('button_is-active');
+  };
+
+  const popupImage = document.querySelector('.popup_type_big-image')
+
+  function createCard(element) {
+    const cardTemplate = document.querySelector('#card-template').content;
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+    const bigImage = cardElement.querySelector('.card__image');
+    bigImage.addEventListener('click', () => openPopup(popupImage));
+
+    cardElement.querySelector('.card__image').src = element.link;
+    cardElement.querySelector('.card__title').textContent = element.name;
+
+    cardElement.querySelector('.card__button-like').addEventListener('click', liked);
+
+    cardElement.querySelector('.card__button-delete').addEventListener('click', evt => {
+      const card = getCardByEvent(evt);
+      card.remove();
+    });
+
+    cardsItemsElement.prepend(cardElement);
+
+  }
+  initialCards.forEach(createCard);

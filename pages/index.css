@@ -60,4 +60,5 @@
 @import url(../blocks/popup/__button-close/_place/popup__button-close_place_add.css);
 @import url(../blocks/popup/__button-close/_place/popup__button-close_place_image.css);
 @import url(../blocks/popup/__button-submit/popup__button-submit.css);
+@import url(../blocks/popup/__form-container/popup__form-container.css);
 @import url(../blocks/popup/__image-container/popup__image-container.css);
