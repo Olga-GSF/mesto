@@ -1,37 +1,10 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const editButton = document.querySelector('.profile__button-edit')
 
 const popup = document.querySelector('.popup')
 const popupEdit = document.querySelector('.popup_type_edit-profile')
 const popupAdd = document.querySelector('.popup_type_add-card')
 
-const closePopupButton = document.querySelector('.popup__button-close')
+const closePopupButton = document.querySelector('.popup__button-close_place_edit')
 const closePopupAddButton = document.querySelector('.popup__button-close_place_add')
 const closePopupImageButton = document.querySelector('.popup__button-close_place_image')
 
@@ -90,15 +63,14 @@ function liked(evt) {
   evt.target.classList.toggle('button_is-active');
 };
 
+const popupImage = document.querySelector('.popup_type_big-image')
+
 function openCard(evt) {
   console.log(evt.querySelector('.card__image').src);
-  console.log(evt.target.closest('.card__image'));
+  popupImage.querySelector('.card__image').src = evt.querySelector('.card__image').src;
+  popupImage.querySelector('.popup__image-title').textContent = evt.querySelector('.card__title').textContent;
+  openPopup(popupImage)
 }
-function liked(evt) {
-  evt.target.classList.toggle('button_is-active');
-};
-
-const popupImage = document.querySelector('.popup_type_big-image')
 
 function createCard(element) {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -120,13 +92,3 @@ function createCard(element) {
 
 }
 initialCards.forEach(createCard);
-
-// function openCard(name, link) {
-//   const popupImageTitle = document.querySelector('.popup__image-title').textContent;
-//   const popupImageLink = document.querySelector('.card__image').src;
-//   const bigImage = document.querySelector('.card__image');
-//   bigImage.addEventListener('click', () => openPopup(popupImage));
-// }
-
-// const openCardByEvent = evt => evt.currentTarget.closest('.card__image');
-// popupImage.querySelector('.card__image').alt = event.querySelector('.card__image').alt;

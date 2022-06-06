@@ -3,4 +3,9 @@
   width: 282px;
   height: 282px;
   display: block;
+  transition: opacity 0.1s ease-out;
+}
+
+.card__image:hover {
+  opacity: 0.9;
 }

@@ -41,9 +41,10 @@
 
     <div class="popup popup_type_edit-profile">
       <div class="popup__content">
-        <button aria-label="close" type="button" class="button popup__button-close"></button>
+        <button aria-label="close" type="button"
+          class="button popup__button-close popup__button-close_place_edit"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form name="info" action="submit" class="popup__form">
+        <form name="info" action="submit" class="popup__form popup__form_place_edit">
           <input name="name" type="text" class="popup__input popup__input_name_firstname" placeholder="Имя">
           <input name="description" type="text" class="popup__input popup__input_name_description"
             placeholder="Описание">
@@ -54,7 +55,8 @@
 
     <div class="popup popup_type_add-card">
       <div class="popup__content">
-        <button aria-label="close" type="button" class="button popup__button-close_place_add"></button>
+        <button aria-label="close" type="button"
+          class="button popup__button-close popup__button-close_place_add"></button>
         <h3 class="popup__title">Новое место</h3>
         <form name="info" action="submit" class="popup__form popup__form_place_add">
           <input name="name" type="text" class="popup__input popup__input_name_place" placeholder="Название">
@@ -65,12 +67,13 @@
     </div>
 
     <div class="popup popup_type_big-image">
-      <div class="popup__content">
+      <div class="popup__content no-paddings">
         <figure class="popup__image-container">
-          <img src="#" alt="место" class="card__image">
+          <img src="#" alt="место" class="card__image popup__big-image">
           <figcaption class="popup__image-title"></figcaption>
         </figure>
-        <button aria-label="close" type="button" class="button popup__button-close_place_image"></button>
+        <button aria-label="close" type="button"
+          class="button popup__button-close popup__button-close_place_image"></button>
       </div>
     </div>
   </div>
@@ -86,6 +89,7 @@
     </div>
   </template>
 
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
