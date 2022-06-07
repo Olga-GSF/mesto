@@ -66,7 +66,6 @@ function liked(evt) {
 const popupImage = document.querySelector('.popup_type_big-image')
 
 function openCard(evt) {
-  console.log(evt.querySelector('.card__image').src);
   popupImage.querySelector('.popup__big-image').src = evt.querySelector('.card__image').src;
   popupImage.querySelector('.popup__image-title').textContent = evt.querySelector('.card__title').textContent;
   openPopup(popupImage)
