@@ -1,8 +1,9 @@
 const editButton = document.querySelector('.profile__button-edit')
 
 const popup = document.querySelector('.popup')
-const popupEdit = document.querySelector('.popup_type_edit-profile')
-const popupAdd = document.querySelector('.popup_type_add-card')
+const profilePopup = document.querySelector('.popup_type_edit-profile')
+const cardPopup = document.querySelector('.popup_type_add-card')
+const popupImage = document.querySelector('.popup_type_big-image')
 
 const closePopupButton = document.querySelector('.popup__button-close_place_edit')
 const closePopupAddButton = document.querySelector('.popup__button-close_place_add')
@@ -48,22 +49,20 @@ function formAdd(evt) {
     link: linkFieldElement.value
   };
   createCard(cardNew);
-  closePopup(popupAdd);
+  closePopup(cardPopup);
 };
 
 editButton.addEventListener('click', () => openPopup(popup));
 closePopupButton.addEventListener('click', () => closePopup(popup));
-closePopupAddButton.addEventListener('click', () => closePopup(popupAdd));
+closePopupAddButton.addEventListener('click', () => closePopup(cardPopup));
 closePopupImageButton.addEventListener('click', () => closePopup(popupImage));
-addButton.addEventListener('click', () => openPopup(popupAdd));
+addButton.addEventListener('click', () => openPopup(cardPopup));
 formElement.addEventListener('submit', formEdit);
 formElementAdd.addEventListener('submit', formAdd);
 
 function liked(evt) {
   evt.target.classList.toggle('button_is-active');
 };
-
-const popupImage = document.querySelector('.popup_type_big-image')
 
 function openCard(evt) {
   popupImage.querySelector('.popup__big-image').src = evt.querySelector('.card__image').src;
