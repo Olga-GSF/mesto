@@ -25,10 +25,6 @@ const cardsItemsElement = document.querySelector('.cards__items')
 const nameAddFieldElement = document.querySelector('.popup__input_name_place')
 const linkFieldElement = document.querySelector('.popup__input_name_link')
 
-const imagePopupCard = document.querySelector('.popup__big-image')
-const imagePopupTitle = document.querySelector('.popup__image-title')
-const imagePopupAlt = document.querySelector('.popup__image-title')
-
 const getCardByEvent = evt => evt.currentTarget.closest('.card');
 
 function openPopup(popup) {
@@ -76,7 +72,9 @@ function handleLikeButton(evt) {
   evt.target.classList.toggle('button_is-active');
 };
 
-
+const imagePopupCard = document.querySelector('.popup__big-image')
+const imagePopupTitle = document.querySelector('.popup__image-title')
+const imagePopupAlt = document.querySelector('.popup__image-title')
 
 function openCard(cardElement) {
   imagePopupCard.src = cardElement.querySelector('.card__image').src;
@@ -84,21 +82,6 @@ function openCard(cardElement) {
   imagePopupAlt.alt = cardElement.querySelector('.card__title').textContent;
   openPopup(imagePopup);
 };
-
-// const imagePopupCard = document.querySelector('.popup__big-image')
-// const imagePopupTitle = document.querySelector('.popup__image-title')
-// const imagePopupAlt = document.querySelector('.popup__image-title')
-
-// const linkValue = document.querySelector('.card__image')
-// const titleValue = document.querySelector('.card__title')
-
-// function openCard(link, name) {
-//   imagePopupCard.link = link.src;
-//   imagePopupTitle.name = titleValue.textContent;
-//   imagePopupAlt.alt = titleValue.name;
-
-//   openPopup(imagePopup);
-// };
 
 function createCard(element) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
