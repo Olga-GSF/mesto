@@ -77,21 +77,27 @@ function handleLikeButton(evt) {
 };
 
 
+
 function openCard(cardElement) {
   imagePopupCard.src = cardElement.querySelector('.card__image').src;
   imagePopupTitle.textContent = cardElement.querySelector('.card__title').textContent;
   imagePopupAlt.alt = cardElement.querySelector('.card__title').textContent;
-  openPopup(imagePopup)
+  openPopup(imagePopup);
 };
 
-// const linkValue = cardElement.querySelector('.card__image')
-// const titleValue = cardElement.querySelector('.card__title')
+// const imagePopupCard = document.querySelector('.popup__big-image')
+// const imagePopupTitle = document.querySelector('.popup__image-title')
+// const imagePopupAlt = document.querySelector('.popup__image-title')
 
-// function openCard(titleValue, linkValue) {
-//   imagePopupCard.src = linkValue.src;
-//   imagePopupTitle.textContent = titleValue.textContent;
-//   imagePopupAlt.alt = titleValue.textContent;
-//   openPopup(imagePopup)
+// const linkValue = document.querySelector('.card__image')
+// const titleValue = document.querySelector('.card__title')
+
+// function openCard(link, name) {
+//   imagePopupCard.link = link.src;
+//   imagePopupTitle.name = titleValue.textContent;
+//   imagePopupAlt.alt = titleValue.name;
+
+//   openPopup(imagePopup);
 // };
 
 function createCard(element) {
