@@ -69,3 +69,69 @@ function createCard(element) { //ФУНК создания карточки по
   //return cardElement;
 }
 initialCards.forEach(createCard); //ФУНК для каждой карточки ихз массива вызови ФУНК создания карточки (НЕ ПОНИМАЮ, почему без скобок и параметров!!!)
+
+function addCard(image, title) {
+  const cardFull = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardImage = cardFull.querySelector('.element__image');
+  cardImage.src = image;
+  cardImage.alt = title;
+  cardFull.querySelector('.element__title').textContent = title;
+  cardFull.querySelector('.element__like').addEventListener('click', likeCard);
+  cardFull.querySelector('.element__delete').addEventListener('click', removeCard);
+  cardImage.addEventListener('click', () => scaleImage(cardImage));
+  return cardFull;
+};
+
+function renderCard(elementPlace, element) {
+  elementPlace.prepend(element);
+};
+
+initialCards.forEach((item) => {
+  const element = addCard(item.link, item.name);
+  renderCard(cardElements, element);
+});
+
+
+// function renderCard(cardElement) {
+//   cardsItemsElement.prepend(cardElement);
+// };
+
+
+
+const imagePopupCard = document.querySelector('.popup__big-image') //ДОМ элемент тега большой картинки
+const imagePopupTitle = document.querySelector('.popup__image-title') //тайтл тега тайтла большой картинки
+const imagePopupAlt = document.querySelector('.popup__image-title') // Альт тега большой картинки
+
+function createCard(element) { //ФУНК для создания карточки по ДОМ элементу Темплита тега card
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const bigImage = cardElement.querySelector('.card__image'); //КОНС находим класс Картинки в ДОМ элемнте тега card
+  bigImage.addEventListener('click', () => openCard(element));//ФУНК при клике на КАртинку вызови ФУНК openCard с параметрами ДОМ элемента тега Темплита
+
+  bigImage.src = element.link;
+  cardElement.querySelector('.card__title').textContent = element.name; //находим значения для ДОМ элемента
+  cardElement.querySelector('.card__title').alt = element.name;
+
+  cardElement.querySelector('.card__button-like').addEventListener('click', handleLikeButton); //при клике на ДОМ элемент с таким классом вызови ФУНК подстановки Модификатора
+
+  cardElement.querySelector('.card__button-delete').addEventListener('click', evt => { //при клике на ДОМ элемент с таким классом вызови ФУНК удаления карточки ниже
+    const card = getCardByEvent(evt);
+    card.remove();
+  });
+
+  //return cardElement;
+  cardsItemsElement.prepend(cardElement); //ФУНК выбора ДОМ элемента их списка ДОМ элементов и Добавление нового спереди
+}
+
+initialCards.forEach(createCard); //для каждого лемента массива вызови ФУНК создания карточки (почему-то без скобок и параметров)
+
+function openCard(element) { //ФУНК открытия ДОМ элемента c параметром element
+  imagePopupCard.src = element.link; //отждествление значений линк и нейм для новых КОНС
+  imagePopupTitle.textContent = element.name;
+  imagePopupAlt.alt = element.name;
+  openPopup(imagePopup);
+};
+
+// function renderCard(cardElement) {
+//   cardsItemsElement.prepend(cardElement);
+// };
+
