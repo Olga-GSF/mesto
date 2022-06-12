@@ -72,7 +72,6 @@ function handleLikeButton(evt) {
 
 const imagePopupCard = document.querySelector('.popup__big-image')
 const imagePopupTitle = document.querySelector('.popup__image-title')
-const imagePopupAlt = document.querySelector('.popup__image-title')
 
 function renderCard(element) {
   const cardElement = createCard(element);
@@ -86,7 +85,7 @@ function createCard(element) {
 
   bigImage.src = element.link;
   cardElement.querySelector('.card__title').textContent = element.name;
-  cardElement.querySelector('.card__title').alt = element.name;
+  bigImage.alt = element.name;
 
   cardElement.querySelector('.card__button-like').addEventListener('click', handleLikeButton);
 
@@ -102,6 +101,6 @@ initialCards.forEach(renderCard);
 function openCard(element) {
   imagePopupCard.src = element.link;
   imagePopupTitle.textContent = element.name;
-  imagePopupAlt.alt = element.name;
+  imagePopupCard.alt = element.name;
   openPopup(imagePopup);
 };
