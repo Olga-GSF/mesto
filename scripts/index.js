@@ -40,6 +40,7 @@ function openProfilePopup() {
   openPopup(profilePopup);
 };
 
+
 function closePopup(popup) {
   popup.classList.remove('popup_is-open');
   document.removeEventListener('keydown', handlerEsc);
