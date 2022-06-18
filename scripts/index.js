@@ -28,8 +28,6 @@ const getCardByEvent = evt => evt.currentTarget.closest('.card');
 
 function openPopup(popup) {
   popup.classList.add('popup_is-open');
-  nameFieldElement.value = titleElement.textContent;
-  descriptionFieldElement.value = subtitleElement.textContent;
   document.addEventListener('keydown', handlerEsc);
   document.addEventListener('click', handleOverlay);
 };
@@ -75,10 +73,12 @@ function addFormCard(evt) {
   renderCard(cardNew);
   formElementCard.reset();
   closePopup(cardPopup);
+  const buttonSubmitNewCard = formElementCard.querySelector('.popup__button-submit')
+  buttonSubmitNewCard.classList.add('popup__button-submit_disabled');
 };
 
 
-buttonEditProfile.addEventListener('click', () => openPopup(profilePopup));
+buttonEditProfile.addEventListener('click', () => openProfilePopup(profilePopup));
 buttonCloseProfile.addEventListener('click', () => closePopup(profilePopup));
 buttonCloseCard.addEventListener('click', () => closePopup(cardPopup));
 buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
