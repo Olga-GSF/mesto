@@ -37,10 +37,6 @@ form.addEventListener('submit', function (evt) {
   evt.preventDefault();
 });
 
-formInput.addEventListener('input', function () {
-  checkInputValidity(form, formInput);
-});
-
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;

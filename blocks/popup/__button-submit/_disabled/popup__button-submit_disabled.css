@@ -1,8 +1,5 @@
 .popup__button-submit_disabled {
   opacity: 0.2;
-  cursor: not-allowed;
-}
-
-.popup__button-submit_disabled:hover {
-  opacity: 0.2;
+  /*cursor: not-allowed;*/
+  pointer-events: none;
 }

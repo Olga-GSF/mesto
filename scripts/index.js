@@ -5,7 +5,7 @@ const buttonEditProfile = document.querySelector('.profile__button-edit')
 const profilePopup = document.querySelector('.popup_type_edit-profile')
 const cardPopup = document.querySelector('.popup_type_add-card')
 const imagePopup = document.querySelector('.popup_type_big-image')
-const popupElement = document.querySelectorAll('.popup')
+const popupElements = document.querySelectorAll('.popup')
 
 const buttonCloseProfile = profilePopup.querySelector('.popup__button-close')
 const buttonCloseCard = cardPopup.querySelector('.popup__button-close')
@@ -28,6 +28,8 @@ const getCardByEvent = evt => evt.currentTarget.closest('.card');
 
 function openPopup(popup) {
   popup.classList.add('popup_is-open');
+  nameFieldElement.value = titleElement.textContent;
+  descriptionFieldElement.value = subtitleElement.textContent;
   document.addEventListener('keydown', handlerEsc);
   document.addEventListener('click', handleOverlay);
 };
@@ -46,14 +48,13 @@ function closePopup(popup) {
 
 function handlerEsc(evt) {
   if (evt.key === 'Escape') {
-    popupElement.forEach(closePopup);
+    popupElements.forEach(closePopup);
   };
 };
 
 function handleOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
-    evt.target.classList.remove('popup_is-open');
-    popupElement.forEach(closePopup);
+    popupElements.forEach(closePopup);
   };
 }
 
@@ -61,7 +62,6 @@ function editFormProfile(event) {
   event.preventDefault()
   titleElement.textContent = nameFieldElement.value;
   subtitleElement.textContent = descriptionFieldElement.value;
-  //formElementProfile.reset();
   closePopup(profilePopup);
 };
 
