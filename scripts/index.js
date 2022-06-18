@@ -2,12 +2,10 @@ const cardTemplate = document.querySelector('#card-template').content;
 
 const buttonEditProfile = document.querySelector('.profile__button-edit')
 
-
 const profilePopup = document.querySelector('.popup_type_edit-profile')
 const cardPopup = document.querySelector('.popup_type_add-card')
 const imagePopup = document.querySelector('.popup_type_big-image')
 const popupElement = document.querySelectorAll('.popup')
-//const popupContainer = document.querySelector('.popup')
 
 const buttonCloseProfile = profilePopup.querySelector('.popup__button-close')
 const buttonCloseCard = cardPopup.querySelector('.popup__button-close')
@@ -63,7 +61,7 @@ function editFormProfile(event) {
   event.preventDefault()
   titleElement.textContent = nameFieldElement.value;
   subtitleElement.textContent = descriptionFieldElement.value;
-  formElementProfile.reset();
+  //formElementProfile.reset();
   closePopup(profilePopup);
 };
 
