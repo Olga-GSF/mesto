@@ -1,5 +1,15 @@
 import { initialCards } from './cards.js';
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'popup__button-submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
 
 //const cardTemplate = document.querySelector('#card-template').content;
 const cardTemplate = '#card-template';
@@ -73,6 +83,7 @@ function editFormProfile(event) {
 };
 
 function addFormCard(evt) {
+  console.log('Функция вызвана');
   evt.preventDefault()
   const cardNew = {
     name: nameNewFieldElement.value,
@@ -83,6 +94,7 @@ function addFormCard(evt) {
   closePopup(cardPopup);
   buttonSubmitNewCard.classList.add('popup__button-submit_disabled');
   buttonSubmitNewCard.setAttribute('disabled', true);
+
 };
 
 const info = {
@@ -110,24 +122,6 @@ function renderCard(createdCard) {
   cardsItemsElement.prepend(createdCard);
 };
 
-// function createCard(element) {
-//   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-//   const bigImage = cardElement.querySelector('.card__image');
-//   bigImage.addEventListener('click', () => openCard(element));
-
-//   bigImage.src = element.link;
-//   cardElement.querySelector('.card__title').textContent = element.name;
-//   bigImage.alt = element.name;
-
-//   cardElement.querySelector('.card__button-like').addEventListener('click', handleLikeButton);
-
-//   cardElement.querySelector('.card__button-delete').addEventListener('click', evt => {
-//     const card = getCardByEvent(evt);
-//     card.remove();
-//   });
-//   return cardElement;
-// }
-
 const createCard = (info) => {
   const card = new Card(info, cardTemplate, openCard);
   const createdCard = card.generateCard();
@@ -136,8 +130,6 @@ const createCard = (info) => {
 
 initialCards.forEach((card) => { renderCard(createCard(card)); });
 
-//initialCards.forEach((card) => { addCardToContainer(createCard(card)); });
-
 
 function openCard(name, link) {
   imagePopupCard.src = link;
@@ -145,3 +137,24 @@ function openCard(name, link) {
   imagePopupCard.alt = name;
   openPopup(imagePopup);
 };
+
+const formValidate = {};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(settings, formElement);
+    formValidate = formValidator;
+    formValidator.enableValidation();
+  });
+}
+
+//const enableValidation = () => {
+// const formList = Array.from(document.querySelectorAll(installation.formSelector));
+// formList.forEach((formElement) => {
+// const validity = new FormValidator(installation, formElement);
+const formName = formElement.getAttribute('name');
+formValidity[formName] = validity;
+// validity.enableValidation();
+//})
+//}
