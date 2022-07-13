@@ -94,3 +94,7 @@ this._element.addEventListener('click', () => {
 popupCloseButton.addEventListener('click', () => {
   this._handleClosePopup();
 });
+
+было в addCard
+buttonSubmitNewCard.classList.add('popup__button-submit_disabled');
+buttonSubmitNewCard.setAttribute('disabled', true);

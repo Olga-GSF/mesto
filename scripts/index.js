@@ -44,19 +44,20 @@ const nameNewFieldElement = cardPopup.querySelector('.popup__input_name_place')
 const linkNewFieldElement = cardPopup.querySelector('.popup__input_name_link')
 
 const getCardByEvent = evt => evt.currentTarget.closest('.card');
+const getPopupByEvent = evt => evt.currentTarget.closest('.popup_is-open');
 
 const buttonSubmitNewCard = formElementCard.querySelector('.popup__button-submit')
 
 function openPopup(popup) {
   popup.classList.add('popup_is-open');
   document.addEventListener('keydown', handlerEsc);
-  document.addEventListener('click', handleOverlay);
+  popup.addEventListener('click', handleOverlay);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_is-open');
   document.removeEventListener('keydown', handlerEsc);
-  document.removeEventListener('click', handleOverlay);
+  popup.removeEventListener('click', handleOverlay);
 };
 
 function openProfilePopup() {
@@ -99,7 +100,6 @@ function addFormCard(evt) {
   renderCard(createCard(cardNew));
   formElementCard.reset();
   closePopup(cardPopup);
-  buttonSubmitNewCard.classList.add('popup__button-submit_disabled');
   buttonSubmitNewCard.setAttribute('disabled', true);
 
 };

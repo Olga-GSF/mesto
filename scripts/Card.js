@@ -30,6 +30,7 @@ export class Card {
 
   _handleButtontnDelete() {
     this.element.remove();
+    this.element = null;
   }
 
   _addEventListeners() {

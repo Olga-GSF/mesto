@@ -1,12 +1,3 @@
-const settings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-submit',
-  inactiveButtonClass: 'popup__button-submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
-
 const form = document.querySelector(settings.formSelector)
 const formInput = form.querySelector(settings.inputSelector)
 const formError = form.querySelector(`.${formInput.id}-error`);
