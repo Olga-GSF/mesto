@@ -34,6 +34,8 @@ const descriptionFieldElement = profilePopup.querySelector('.popup__input_name_d
 
 const formElementProfile = profilePopup.querySelector('.popup__form_place_edit')
 const formElementCard = cardPopup.querySelector('.popup__form_place_add')
+const formEditProfileName = formElementProfile.getAttribute('name');
+const formCardName = formElementCard.getAttribute('name');
 
 const cardsItemsElement = document.querySelector('.cards__items')
 const nameAddFieldElement = cardPopup.querySelector('.popup__input_name_place')
@@ -61,6 +63,12 @@ function openProfilePopup() {
   nameFieldElement.value = titleElement.textContent;
   descriptionFieldElement.value = subtitleElement.textContent;
   openPopup(profilePopup);
+  formValidate[formEditProfileName].resetValidation();
+};
+
+function openCardPopup() {
+  openPopup(cardPopup);
+  formValidate[formCardName].resetValidation();
 };
 
 function handlerEsc(evt) {
@@ -83,7 +91,6 @@ function editFormProfile(event) {
 };
 
 function addFormCard(evt) {
-  console.log('Функция вызвана');
   evt.preventDefault()
   const cardNew = {
     name: nameNewFieldElement.value,
@@ -106,7 +113,7 @@ buttonEditProfile.addEventListener('click', () => openProfilePopup(profilePopup)
 buttonCloseProfile.addEventListener('click', () => closePopup(profilePopup));
 buttonCloseCard.addEventListener('click', () => closePopup(cardPopup));
 buttonCloseImage.addEventListener('click', () => closePopup(imagePopup));
-buttonAddCard.addEventListener('click', () => openPopup(cardPopup));
+buttonAddCard.addEventListener('click', () => openCardPopup(cardPopup));
 formElementProfile.addEventListener('submit', editFormProfile);
 formElementCard.addEventListener('submit', addFormCard);
 
@@ -122,6 +129,18 @@ function renderCard(createdCard) {
   cardsItemsElement.prepend(createdCard);
 };
 
+const formValidate = {};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(settings, formElement);
+    const formNewName = formElement.getAttribute('name');
+    formValidate[formNewName] = formValidator;
+    formValidator.enableValidation();
+  });
+}
+
 const createCard = (info) => {
   const card = new Card(info, cardTemplate, openCard);
   const createdCard = card.generateCard();
@@ -130,6 +149,8 @@ const createCard = (info) => {
 
 initialCards.forEach((card) => { renderCard(createCard(card)); });
 
+enableValidation();
+
 
 function openCard(name, link) {
   imagePopupCard.src = link;
@@ -137,24 +158,3 @@ function openCard(name, link) {
   imagePopupCard.alt = name;
   openPopup(imagePopup);
 };
-
-const formValidate = {};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(settings.formSelector));
-  formList.forEach((formElement) => {
-    const formValidator = new FormValidator(settings, formElement);
-    formValidate = formValidator;
-    formValidator.enableValidation();
-  });
-}
-
-//const enableValidation = () => {
-// const formList = Array.from(document.querySelectorAll(installation.formSelector));
-// formList.forEach((formElement) => {
-// const validity = new FormValidator(installation, formElement);
-const formName = formElement.getAttribute('name');
-formValidity[formName] = validity;
-// validity.enableValidation();
-//})
-//}
