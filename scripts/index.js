@@ -44,7 +44,8 @@ const nameNewFieldElement = cardPopup.querySelector('.popup__input_name_place')
 const linkNewFieldElement = cardPopup.querySelector('.popup__input_name_link')
 
 const getCardByEvent = evt => evt.currentTarget.closest('.card');
-const getPopupByEvent = evt => evt.currentTarget.closest('.popup_is-open');
+//const getPopupByEvent = evt => evt.currentTarget.closest('.popup_is-open');
+//const getPopupByEvent = document.querySelector('.popup_is-open')
 
 const buttonSubmitNewCard = formElementCard.querySelector('.popup__button-submit')
 
@@ -72,17 +73,31 @@ function openCardPopup() {
   formValidate[formCardName].resetValidation();
 };
 
+// function handlerEsc(evt) {
+//   if (evt.key === 'Escape') {
+//     popupElements.forEach(closePopup);
+//   };
+// };
+
 function handlerEsc(evt) {
   if (evt.key === 'Escape') {
-    popupElements.forEach(closePopup);
+    const getPopupByEvent = document.querySelector('.popup_is-open')
+    closePopup(getPopupByEvent);
   };
 };
 
 function handleOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
-    popupElements.forEach(closePopup);
+    evt.target.classList.remove('popup_is-open');
   };
 }
+
+
+// function handleOverlay(evt) {
+//   if (evt.target.classList.contains('popup')) {
+//     popupElements.forEach(closePopup);
+//   };
+// }
 
 function editFormProfile(event) {
   event.preventDefault()
