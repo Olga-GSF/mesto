@@ -47,7 +47,7 @@ const getCardByEvent = evt => evt.currentTarget.closest('.card');
 //const getPopupByEvent = evt => evt.currentTarget.closest('.popup_is-open');
 //const getPopupByEvent = document.querySelector('.popup_is-open')
 
-const buttonSubmitNewCard = formElementCard.querySelector('.popup__button-submit')
+//const buttonSubmitNewCard = formElementCard.querySelector('.popup__button-submit')
 
 function openPopup(popup) {
   popup.classList.add('popup_is-open');
@@ -70,7 +70,7 @@ function openProfilePopup() {
 
 function openCardPopup() {
   openPopup(cardPopup);
-  formValidate[formCardName].resetValidation();
+  //formValidate[formCardName].resetValidation();
 };
 
 // function handlerEsc(evt) {
@@ -81,14 +81,14 @@ function openCardPopup() {
 
 function handlerEsc(evt) {
   if (evt.key === 'Escape') {
-    const getPopupByEvent = document.querySelector('.popup_is-open')
-    closePopup(getPopupByEvent);
+    const popupByEvent = document.querySelector('.popup_is-open')
+    closePopup(popupByEvent);
   };
 };
 
 function handleOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
-    evt.target.classList.remove('popup_is-open');
+    closePopup(evt.target);
   };
 }
 
@@ -115,7 +115,6 @@ function addFormCard(evt) {
   renderCard(createCard(cardNew));
   formElementCard.reset();
   closePopup(cardPopup);
-  buttonSubmitNewCard.setAttribute('disabled', true);
 
 };
 
