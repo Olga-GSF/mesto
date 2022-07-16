@@ -70,7 +70,7 @@ function openProfilePopup() {
 
 function openCardPopup() {
   openPopup(cardPopup);
-  //formValidate[formCardName].resetValidation();
+  formValidate[formCardName].resetValidation();
 };
 
 // function handlerEsc(evt) {
