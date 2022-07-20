@@ -1,6 +1,12 @@
-import { initialCards } from './cards.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import { initialCards } from '../scripts/cards.js';
+import { Card } from '../scripts/Card.js';
+import { FormValidator } from '../scripts/FormValidator.js';
+
+import '../pages/index.css';
+// import { Section } from '../scripts/Section.js';
+// import { UserInfo } from '../scripts/UserInfo.js';
+// import { PopupWithForm } from '../scripts/PopupWithForm.js';
+// import { PopupWithImage } from '../scripts/PopupWithImage.js';
 
 const settings = {
   formSelector: '.popup__form',
@@ -10,6 +16,8 @@ const settings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 };
+
+//const section = new Section({ data: items, renderer }, cardsItemsElement);
 
 //const cardTemplate = document.querySelector('#card-template').content;
 const cardTemplate = '#card-template';
@@ -44,8 +52,6 @@ const nameNewFieldElement = cardPopup.querySelector('.popup__input_name_place')
 const linkNewFieldElement = cardPopup.querySelector('.popup__input_name_link')
 
 const getCardByEvent = evt => evt.currentTarget.closest('.card');
-//const getPopupByEvent = evt => evt.currentTarget.closest('.popup_is-open');
-//const getPopupByEvent = document.querySelector('.popup_is-open')
 
 //const buttonSubmitNewCard = formElementCard.querySelector('.popup__button-submit')
 
@@ -73,12 +79,6 @@ function openCardPopup() {
   formValidate[formCardName].resetValidation();
 };
 
-// function handlerEsc(evt) {
-//   if (evt.key === 'Escape') {
-//     popupElements.forEach(closePopup);
-//   };
-// };
-
 function handlerEsc(evt) {
   if (evt.key === 'Escape') {
     const popupByEvent = document.querySelector('.popup_is-open')
@@ -91,13 +91,6 @@ function handleOverlay(evt) {
     closePopup(evt.target);
   };
 }
-
-
-// function handleOverlay(evt) {
-//   if (evt.target.classList.contains('popup')) {
-//     popupElements.forEach(closePopup);
-//   };
-// }
 
 function editFormProfile(event) {
   event.preventDefault()
