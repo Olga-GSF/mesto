@@ -1,9 +1,9 @@
-import { initialCards } from '../scripts/cards.js';
-import { Card } from '../scripts/Card.js';
-import { FormValidator } from '../scripts/FormValidator.js';
+import './index.css';
 
-import '../pages/index.css';
-// import { Section } from '../scripts/Section.js';
+import { initialCards } from '../components/cards.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
 // import { UserInfo } from '../scripts/UserInfo.js';
 // import { PopupWithForm } from '../scripts/PopupWithForm.js';
 // import { PopupWithImage } from '../scripts/PopupWithImage.js';
@@ -17,7 +17,6 @@ const settings = {
   errorClass: 'popup__input-error_active'
 };
 
-//const section = new Section({ data: items, renderer }, cardsItemsElement);
 
 //const cardTemplate = document.querySelector('#card-template').content;
 const cardTemplate = '#card-template';
@@ -148,13 +147,24 @@ const enableValidation = () => {
   });
 }
 
+//создаем экземпляр карточки
 const createCard = (info) => {
   const card = new Card(info, cardTemplate, openCard);
   const createdCard = card.generateCard();
   return createdCard;
 }
 
-initialCards.forEach((card) => { renderCard(createCard(card)); });
+const section = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const createdItem = createCard(item);
+    section.addItem(createdItem);
+  }
+}, cardsItemsElement);
+
+section.renderItems();
+
+//initialCards.forEach((card) => { renderCard(createCard(card)); });
 
 enableValidation();
 
