@@ -68,7 +68,7 @@ buttonEditProfile.addEventListener('click', () => {
 })
 
 //добавление Карточки
-const cardPopup = '.popup popup_type_add-card';
+const cardPopup = '.popup_type_add-card';
 const popupCardWithForm = new PopupWithForm({
   popupSelector: cardPopup,
   callbackSubmitForm: (formData) => {

@@ -13,8 +13,8 @@ export class UserInfo {
   }
 
   setUserInfo(element) {
-    this.name.textContent = element.titleElement;
-    this.description.textContent = element.subtitleElement;
+    this.name.textContent = element.userName;
+    this.description.textContent = element.description;
   }
 
 }
