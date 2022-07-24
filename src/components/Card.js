@@ -1,12 +1,11 @@
 
 export class Card {
-  constructor(info, selector, openCard, bigImage) {
+  constructor(info, selector, handleCardClick) {
     this._name = info.name;
     this._link = info.link;
     this._selector = selector;
-    this._openCard = openCard;
-    this._bigImage = bigImage;
-
+    //this._bigImage = bigImage;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -20,10 +19,11 @@ export class Card {
   }
 
   _createCard() {
-    this._bigImage = this.element.querySelector('.card__image');
+    const bigImage = this.element.querySelector('.card__image');
     this.element.querySelector('.card__title').textContent = this._name;
-    this._bigImage.src = this._link;
-    this._bigImage.alt = this._name;
+    bigImage.src = this._link;
+    bigImage.alt = this._name;
+
   }
 
   _handleLikeButton(evt) {
@@ -36,7 +36,9 @@ export class Card {
   }
 
   _addEventListeners() {
-    this._bigImage.addEventListener('click', () => { this._openCard(this._name, this._link) });
+    const bigImage = this.element.querySelector('.card__image');
+    //console.log(bigImage);
+    bigImage.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
 
     this.element.querySelector('.card__button-like').addEventListener('click', this._handleLikeButton);
 
