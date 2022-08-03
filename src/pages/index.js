@@ -1,51 +1,3 @@
-fetch('https://mesto.nomoreparties.co/v1/cohort-47/cards', {
-  headers: {
-    authorization: '216df983-7365-4312-a47e-9764ea1d99b1'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-47/users/me', {
-  headers: {
-    authorization: '216df983-7365-4312-a47e-9764ea1d99b1'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-47/users/me', {
-  method: 'PATCH',
-  headers: {
-    authorization: '216df983-7365-4312-a47e-9764ea1d99b1',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'Marie Skłodowska Curie',
-    about: 'Physicist and Chemist'
-  })
-});
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-47/cards', {
-  method: 'POST',
-  headers: {
-    authorization: '216df983-7365-4312-a47e-9764ea1d99b1',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  })
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
 import './index.css';
 
 import { initialCards } from '../components/cards.js';
@@ -55,6 +7,7 @@ import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { Api } from '../components/Api.js';
 
 const settings = {
   formSelector: '.popup__form',
@@ -62,8 +15,13 @@ const settings = {
   submitButtonSelector: '.popup__button-submit',
   inactiveButtonClass: 'popup__button-submit_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
+  errorClass: 'popup__input-error_active',
+
+  url: 'https://mesto.nomoreparties.co/v1/cohort-47',
+  token: '216df983-7365-4312-a47e-9764ea1d99b1'
 };
+
+const api = new Api(settings.url, settings.token);
 
 const formValidate = {};
 
@@ -180,6 +138,18 @@ const createCard = (item) => {
 section.renderItems();
 
 enableValidation();
+
+// Promise.all([
+// 	api.getInitialCards(),
+// 	api.getUserData(),
+// ])
+// 	.then(([items]) => {
+// 		taskList.setItems(items);
+// 		taskList.render(todo);
+// 	})
+// 	.catch((err)=>{
+// 		console.log(err);
+// 	})
 
 //initialCards.forEach((card) => { renderCard(createCard(card)); });
 

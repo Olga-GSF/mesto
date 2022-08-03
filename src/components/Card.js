@@ -6,6 +6,8 @@ export class Card {
     this._selector = selector;
     //this._bigImage = bigImage;
     this._handleCardClick = handleCardClick;
+    //this._token = settings.token; // owner._id см в консоли
+    // this._userId = userId;
   }
 
   _getTemplate() {
