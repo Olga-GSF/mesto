@@ -1,3 +1,51 @@
+fetch('https://mesto.nomoreparties.co/v1/cohort-47/cards', {
+  headers: {
+    authorization: '216df983-7365-4312-a47e-9764ea1d99b1'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-47/users/me', {
+  headers: {
+    authorization: '216df983-7365-4312-a47e-9764ea1d99b1'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-47/users/me', {
+  method: 'PATCH',
+  headers: {
+    authorization: '216df983-7365-4312-a47e-9764ea1d99b1',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Marie Skłodowska Curie',
+    about: 'Physicist and Chemist'
+  })
+});
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-47/cards', {
+  method: 'POST',
+  headers: {
+    authorization: '216df983-7365-4312-a47e-9764ea1d99b1',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  })
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
 import './index.css';
 
 import { initialCards } from '../components/cards.js';
@@ -46,6 +94,24 @@ const popupCardName = cardForm.getAttribute('name');
 const cardsItemsElement = document.querySelector('.cards__items')
 
 const userInfo = new UserInfo(titleElement, subtitleElement);
+
+// const buttonSureDelete = document.querySelector('.card__button-delete');
+
+// //экземпляр попапа согласия sure
+// const surePopup = '.popup_type_sure';
+// const popupSureWithForm = new PopupWithForm({
+//   popupSelector: surePopup,
+//   callbackSubmitForm: (formData) => {
+//     handleButtontnDelete(formData)
+//     popupSureWithForm.close();
+//   }
+// });
+// popupSureWithForm.setEventListeners();
+
+// // открытие попапа согласия sure
+// buttonSureDelete.addEventListener('click', () => {
+//   popupSureWithForm.open();
+// })
 
 //экземпляр попапа профиля
 const profilePopup = '.popup_type_edit-profile';
