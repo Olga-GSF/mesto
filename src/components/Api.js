@@ -41,8 +41,8 @@ export class Api {
       method: 'PATCH',
       headers: this._getHeaders(),
       body: JSON.stringify({
-        name: data.name,
-        about: data.about
+        userName: data.name,
+        description: data.about
       })
     })
       .then(this._getJsonOrError)
@@ -77,7 +77,7 @@ export class Api {
       .then(this._getJsonOrError)
   }
 
-  DisLikeCard(id, liked) {
+  disLikeCard(id, liked) {
     return fetch(`${this._url}/cards/likes${id}`, {
       method: 'DELETE',
       headers: this._getHeaders(),

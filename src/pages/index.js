@@ -17,6 +17,10 @@ const settings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
 
+  cardList: '.card',
+  // cardListForm: '.form_add-task',
+  // cardListFormInput: '.form__input_add-task',
+
   url: 'https://mesto.nomoreparties.co/v1/cohort-47',
   token: '216df983-7365-4312-a47e-9764ea1d99b1'
 };
@@ -51,7 +55,9 @@ const popupCardName = cardForm.getAttribute('name');
 
 const cardsItemsElement = document.querySelector('.cards__items')
 
-const userInfo = new UserInfo(titleElement, subtitleElement);
+const popupAvatar = document.querySelector('.popup_type_renew-avatar')
+
+const userInfo = new UserInfo(titleElement, subtitleElement, popupAvatar);
 
 // const buttonSureDelete = document.querySelector('.card__button-delete');
 
@@ -120,14 +126,6 @@ const handleCardClick = (name, link) => {
   popupWithImage.open(name, link);
 }
 
-const section = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const createdItem = createCard(item);
-    section.addItem(createdItem);
-  }
-}, cardsItemsElement);
-
 //создаем экземпляр карточки
 const createCard = (item) => {
   const card = new Card(item, cardTemplate, handleCardClick);
@@ -135,21 +133,54 @@ const createCard = (item) => {
   return createdCard;
 }
 
-section.renderItems();
+const section = new Section({
+  items: [],
+  renderer: (item) => {
+    const createdItem = createCard(item);
+    section.addItem(createdItem);
+  }
+}, cardsItemsElement);
+
+api.getInitialCards()
+  .then((items) => {
+    section.renderItems(items)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+api.getUserData()
+  .then((data) => {
+    userInfo.setUserInfo({
+      userName: data.name,
+      description: data.about
+    })
+    userInfo.setUserAvatar(data.avatar)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+//section.renderItems();
 
 enableValidation();
 
+// const card = document.querySelector(settings.cardList);
+
+// const cardList = new CardList(settings, createCard);
+//cardListForm.render(card)
+
 // Promise.all([
-// 	api.getInitialCards(),
-// 	api.getUserData(),
+//   api.getInitialCards(),
+//   api.getUserData(),
 // ])
-// 	.then(([items]) => {
-// 		taskList.setItems(items);
-// 		taskList.render(todo);
-// 	})
-// 	.catch((err)=>{
-// 		console.log(err);
-// 	})
+//   .then(([items]) => {
+//     cardList.setItems(items);
+//     cardList.render(card);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
 
 //initialCards.forEach((card) => { renderCard(createCard(card)); });
 

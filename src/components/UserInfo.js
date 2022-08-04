@@ -1,7 +1,12 @@
 export class UserInfo {
-  constructor(name, description) {
+  constructor(name, description, popupAvatar) {
     this.name = name;
     this.description = description;
+    this.popupAvatar = popupAvatar
+  }
+
+  setUserAvatar(element) {
+    this.popupAvatar.src = element.popupAvatar
   }
 
   getUserInfo() {
