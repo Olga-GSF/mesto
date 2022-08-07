@@ -5,6 +5,15 @@
   margin-right: 30px;
 }
 
+.profile__avatar:hover {
+  opacity: 0.25;
+  /*background-color: #C4C4C4;*/
+  background-image: url(../../../images/VectorPen.svg);
+  background-size: 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media screen and (max-width: 639px) {
   .profile__avatar {
     margin-right: 15px;

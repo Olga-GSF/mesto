@@ -53,29 +53,53 @@ const buttonAddCard = document.querySelector('.profile__button-add');
 const cardForm = document.querySelector('.popup__form_place_add');
 const popupCardName = cardForm.getAttribute('name');
 
+const avatarForm = document.querySelector('.popup__form_place_renew')
+const popupAvatarName = avatarForm.getAttribute('name');
+
 const cardsItemsElement = document.querySelector('.cards__items')
 
 const popupAvatar = document.querySelector('.popup_type_renew-avatar')
 
 const userInfo = new UserInfo(titleElement, subtitleElement, popupAvatar);
 
-// const buttonSureDelete = document.querySelector('.card__button-delete');
+const buttonSureDelete = document.querySelector('.card__button-delete');
+console.log(buttonSureDelete);
 
-// //экземпляр попапа согласия sure
-// const surePopup = '.popup_type_sure';
-// const popupSureWithForm = new PopupWithForm({
-//   popupSelector: surePopup,
-//   callbackSubmitForm: (formData) => {
-//     handleButtontnDelete(formData)
-//     popupSureWithForm.close();
-//   }
-// });
-// popupSureWithForm.setEventListeners();
+//экземпляр попапа согласия sure
+const surePopup = '.popup_type_sure';
+const popupSureWithForm = new PopupWithForm({
+  popupSelector: surePopup,
+  callbackSubmitForm: (formData) => {
+    handleButtontnDelete(formData)
+    popupSureWithForm.close();
+  }
+});
+//popupSureWithForm.setEventListeners();
 
-// // открытие попапа согласия sure
+//открытие попапа согласия sure
 // buttonSureDelete.addEventListener('click', () => {
 //   popupSureWithForm.open();
 // })
+
+const renewAvatar = document.querySelector('.profile__avatar')
+
+//создание экземпляра попапа Аватара
+const renewAvatarPopup = '.popup_type_renew-avatar';
+const popupAvatarWithForm = new PopupWithForm({
+  popupSelector: renewAvatarPopup,
+  callbackSubmitForm: (formData) => {
+    const createdAvatar = createCard(formData)
+    section.addItem(createdAvatar);
+    popupAvatarWithForm.close();
+  }
+})
+popupAvatarWithForm.setEventListeners();
+
+//открытие попапа Аватара
+renewAvatar.addEventListener('click', () => {
+  popupAvatarWithForm.open();
+  formValidate[popupAvatarName].resetValidation();
+})
 
 //экземпляр попапа профиля
 const profilePopup = '.popup_type_edit-profile';
@@ -97,7 +121,7 @@ buttonEditProfile.addEventListener('click', () => {
   popupProfileWithForm.open();
 })
 
-//добавление Карточки
+//экземпляр попапа добавления Карточки
 const cardPopup = '.popup_type_add-card';
 const popupCardWithForm = new PopupWithForm({
   popupSelector: cardPopup,

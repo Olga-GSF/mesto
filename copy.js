@@ -98,3 +98,13 @@ popupCloseButton.addEventListener('click', () => {
 было в addCard
 buttonSubmitNewCard.classList.add('popup__button-submit_disabled');
 buttonSubmitNewCard.setAttribute('disabled', true);
+
+//попытка убрать ведро с не моей карточки
+this.element.querySelector('.card__button-delete').addEventListener('click', (evt) => {
+  //this._handleButtontnDelete(evt);
+  if (bigImage._id === settings.token) {
+    this._handleButtontnDelete(evt);
+  }
+  else {
+    bigImage.classList.remove('ard__button-delete')
+  }

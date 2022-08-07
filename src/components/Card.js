@@ -55,9 +55,9 @@ export class Card {
       }
       });
       
-      this.element.querySelector('.card__button-delete').addEventListener('click', (evt) => {
-      this._handleButtontnDelete(evt);
-    });
+    //   this.element.querySelector('.card__button-delete').addEventListener('click', (evt) => {
+    //   this._handleButtontnDelete(evt);
+    // });
   }
 
   generateCard() {
