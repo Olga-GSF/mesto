@@ -67,11 +67,11 @@ console.log(buttonSureDelete);
 
 //экземпляр попапа согласия sure
 const surePopup = '.popup_type_sure';
-const popupSureWithForm = new PopupWithForm({
+const popupWithSure = new PopupWithForm({
   popupSelector: surePopup,
   callbackSubmitForm: (formData) => {
     handleButtontnDelete(formData)
-    popupSureWithForm.close();
+    popupWithSure.close();
   }
 });
 //popupSureWithForm.setEventListeners();
