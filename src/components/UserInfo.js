@@ -1,12 +1,12 @@
 export class UserInfo {
-  constructor(name, description, popupAvatar) {
-    this.name = name;
-    this.description = description;
-    this.popupAvatar = popupAvatar
+  constructor({ titleSelector, subtitleSelector, popupAvatar }) {
+    this.name = document.querySelector(titleSelector);
+    this.description = document.querySelector(subtitleSelector);
+    this.popupAvatar = document.querySelector(popupAvatar)
   }
 
-  setUserAvatar(element) {
-    this.popupAvatar.src = element.popupAvatar
+  setUserAvatar(data) {
+    this.popupAvatar.src = data.avatar
   }
 
   getUserInfo() {
@@ -17,9 +17,17 @@ export class UserInfo {
     return info;
   }
 
-  setUserInfo(element) {
-    this.name.textContent = element.userName;
-    this.description.textContent = element.description;
+  setUserInfo(data) {
+    this.name.textContent = data.userName;
+    this.description.textContent = data.description;
+  }
+
+  getUserId() {
+    return this.id;
+  }
+
+  setUserId(data) {
+    this.id = data._id
   }
 
 }

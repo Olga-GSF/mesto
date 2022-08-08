@@ -1,13 +1,17 @@
 
 export class Card {
-  constructor(info, selector, handleCardClick) {
+  constructor(info, selector, handleCardClick, userId, handleCardDelete) {
+    this._id = info._id;
+    this._ownerId = info.owner._id;
+    this.userId = userId;
     this._name = info.name;
     this._link = info.link;
     this._selector = selector;
-    //this._bigImage = bigImage;
+    this._likes = info.likes;
     this._handleCardClick = handleCardClick;
-    //this._token = settings.token; // owner._id см в консоли
-    // this._userId = userId;
+    //this._handleCardLike = handleCardLike;
+    this._handleCardDelete = handleCardDelete;
+    //console.log(info._id);
   }
 
   _getTemplate() {
@@ -32,16 +36,33 @@ export class Card {
     likeItem.classList.toggle('button_is-active');
   };
 
-  _handleButtontnDelete() {
+  checkLikes() {
+    this._likes.array.some((info) => {
+      return info.id === this.userId;
+    })
+  }
+
+  _setLikes(arr) {
+    likeNumber.textContent = arr.length;
+  }
+
+  _handleButtonDelete() {
     this.element.remove();
     this.element = null;
+  }
+
+  _checkForButtonDelete() {
+    if (this._ownerId !== "2b46b93d623a1f845b967594") {
+      const buttonDelete = this.element.querySelector('.card__button-delete')
+      buttonDelete.remove();
+      }
   }
 
   _addEventListeners() {
     const bigImage = this.element.querySelector('.card__image');
     const likeCard = this.element.querySelector('.card__button-like')
     const likeNumber = this.element.querySelector('.card__like-number');
-    //console.log(bigImage);
+    const buttonDelete = this.element.querySelector('.card__button-delete');
     bigImage.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
 
 
@@ -54,16 +75,22 @@ export class Card {
         likeNumber.textContent = Number(likeNumber.textContent) - 1; //клик на активный лайк, = +1 лайк
       }
       });
+
+      buttonDelete.addEventListener('click', () => this._handleCardDelete(this._id, this.element));
       
-    //   this.element.querySelector('.card__button-delete').addEventListener('click', (evt) => {
-    //   this._handleButtontnDelete(evt);
+    //   buttonDelete.addEventListener('click', (evt) => {
+    //   this._handleButtonDelete(evt);
     // });
   }
 
   generateCard() {
     this.element = this._getTemplate();
+    this.element.querySelector('.card__like-number').textContent = this._likes.length
     this._createCard();
+    //this._setLikes();
     this._addEventListeners();
+    this._checkForButtonDelete();
+    //console.log(this.element);
     return this.element;
   }
 

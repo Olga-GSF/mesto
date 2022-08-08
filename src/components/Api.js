@@ -41,8 +41,8 @@ export class Api {
       method: 'PATCH',
       headers: this._getHeaders(),
       body: JSON.stringify({
-        userName: data.name,
-        description: data.about
+        name: data.userName,
+        about: data.description
       })
     })
       .then(this._getJsonOrError)
@@ -68,20 +68,20 @@ export class Api {
       .then(this._getJsonOrError)
   }
 
-  likeCard(id, liked) {
+  likeCard(card) {
     return fetch(`${this._url}/cards/likes${id}`, {
       method: 'PUT',
       headers: this._getHeaders(),
-      body: JSON.stringify({ liked }),
+      body: JSON.stringify({ card }),
     })
       .then(this._getJsonOrError)
   }
 
-  disLikeCard(id, liked) {
+  disLikeCard(card) {
     return fetch(`${this._url}/cards/likes${id}`, {
       method: 'DELETE',
       headers: this._getHeaders(),
-      body: JSON.stringify({ liked }),
+      body: JSON.stringify({ card }),
     })
       .then(this._getJsonOrError)
   }

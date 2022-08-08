@@ -16,7 +16,10 @@
     <main class="content">
       <section class="profile center">
         <div class="profile__info">
-          <img src="<%=require('./images/image.jpg')%>" alt="аватар" class="profile__avatar">
+          <div class="profile__edit-wrapper">
+            <div class="profile__overlay"></div>
+            <img src="<%=require('./images/image.jpg')%>" alt="аватар" class="profile__avatar">
+          </div>
           <div class="profile__wrapper">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button aria-label="edit" type="button" class="button profile__button-edit"></button>
@@ -82,23 +85,25 @@
     </div>
 
     <div class="popup popup_type_renew-avatar">
-      <div class="popup__content">
+      <div class="popup__content popup__content_optionally_renew">
         <button aria-label="close" type="button" class="button popup__button-close"></button>
         <h3 class="popup__title">Обновить аватар</h3>
         <form name="infoava" id="renewForm" action="submit" class="popup__form popup__form_place_renew" novalidate>
-          <input id="link-input" name="link" type="url" class="popup__input popup__input_name_link"
+          <input id="link-input" name="avatar" type="url" class="popup__input popup__input_name_link"
             placeholder="Ссылка на картинку" required>
           <span class="popup__input-error link-input-error"></span>
-          <button type="submit" class="button popup__button-submit">Сохранить</button>
+          <button type="submit" class="button popup__button-submit popup__button-submit_type_renew">Сохранить</button>
         </form>
       </div>
     </div>
 
     <div class="popup popup_type_sure">
-      <div class="popup__content">
+      <div class="popup__content popup__content_optionally_sure">
         <button aria-label="close" type="button" class="button popup__button-close"></button>
         <h3 class="popup__title">Вы уверены?</h3>
-        <button type="submit" class="button popup__button-submit">Да</button>
+        <form class="popup__form popup__form_place_sure" id="sureForm">
+          <button type="submit" class="button popup__button-submit popup__button-submit_type_sure">Да</button>
+        </form>
       </div>
     </div>
 
