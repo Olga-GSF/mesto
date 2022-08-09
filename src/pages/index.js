@@ -66,7 +66,7 @@ const userInfo = new UserInfo({
 });
 
 
-const buttonDelete = document.querySelector('.card__button-delete');
+//const buttonDelete = document.querySelector('.card__button-delete');
 
 //экземпляр попапа согласия sure
 const surePopup = '.popup_type_sure';
@@ -86,9 +86,6 @@ const popupWithConfirmation = new PopupWithConfirmation({
 popupWithConfirmation.setEventListeners();
 
 //открытие попапа согласия sure
-// buttonDelete.addEventListener('click', () => {
-//   popupWithSure.open();
-// })
 const handleCardDelete = (id, element) => {
   popupWithConfirmation.open(id, element);
 }
@@ -207,13 +204,7 @@ const createCard = (item) => {
   return createdCard;
 }
 
-//создаем экземпляр Аватара
-// const createAvatar = (item) => {
-//   const avatar = new Avatar(item, cardTemplate);
-//   const createdAvatar = avatar.generateAvatar();
-//   return createdAvatar;
-// }
-
+//создаем экземпляр класса section
 const section = new Section({
   items: [],
   renderer: (item) => {

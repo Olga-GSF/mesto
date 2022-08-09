@@ -1,6 +1,6 @@
 
 export class Card {
-  constructor(info, selector, handleCardClick, userId, handleCardDelete) {
+  constructor(info, selector, handleCardClick, userId, handleCardDelete, handleCardLike) {
     this._id = info._id;
     this._ownerId = info.owner._id;
     this.userId = userId;
@@ -9,9 +9,9 @@ export class Card {
     this._selector = selector;
     this._likes = info.likes;
     this._handleCardClick = handleCardClick;
-    //this._handleCardLike = handleCardLike;
+    this._handleCardLike = handleCardLike;
     this._handleCardDelete = handleCardDelete;
-    //console.log(info._id);
+    //console.log(info.likes);
   }
 
   _getTemplate() {
@@ -29,6 +29,10 @@ export class Card {
     this.element.querySelector('.card__title').textContent = this._name;
     bigImage.src = this._link;
     bigImage.alt = this._name;
+
+  }
+
+  _handleCardLike() {
 
   }
 
@@ -65,22 +69,13 @@ export class Card {
     const buttonDelete = this.element.querySelector('.card__button-delete');
     bigImage.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
 
-
     likeCard.addEventListener('click', () => {
       this._handleLikeButton(likeCard);
-      if (likeCard.classList.contains('button_is-active')) {// Number - преобразует в числа
-        likeNumber.textContent = Number(likeNumber.textContent) + 1; //клик на активный лайк, = +1 лайк
-      }
-      else {
-        likeNumber.textContent = Number(likeNumber.textContent) - 1; //клик на активный лайк, = +1 лайк
-      }
+      
       });
 
       buttonDelete.addEventListener('click', () => this._handleCardDelete(this._id, this.element));
-      
-    //   buttonDelete.addEventListener('click', (evt) => {
-    //   this._handleButtonDelete(evt);
-    // });
+    
   }
 
   generateCard() {
@@ -95,6 +90,13 @@ export class Card {
   }
 
 }
+
+// if (likeCard.classList.contains('button_is-active')) {// Number - преобразует в числа
+//   likeNumber.textContent = Number(likeNumber.textContent) + 1; //клик на активный лайк, = +1 лайк
+// }
+// else {
+//   likeNumber.textContent = Number(likeNumber.textContent) - 1; //клик на активный лайк, = +1 лайк
+// }
 
 // setLikeNumber(data) {
 //      return String(data.likes.length);
