@@ -1,19 +1,21 @@
-
 export class Card {
-  constructor(info, selector, handleCardClick, userId, handleCardDelete, handleCardLike) {
+  constructor(info, selector, userId, handleCardClick, handleCardDelete, { setLikes, delLikes }) {
     this._id = info._id;
     this._ownerId = info.owner._id;
-    this.userId = userId;
     this._name = info.name;
     this._link = info.link;
-    this._selector = selector;
     this._likes = info.likes;
+    this._selector = selector;
+    this.userId = userId;
     this._handleCardClick = handleCardClick;
-    this._handleCardLike = handleCardLike;
     this._handleCardDelete = handleCardDelete;
+
+    this._setLikes = setLikes;
+    this._delLikes = delLikes;
+
     //console.log(info.likes);
   }
-
+  
   _getTemplate() {
     const cardElement = document
       .querySelector(this._selector)
@@ -29,25 +31,27 @@ export class Card {
     this.element.querySelector('.card__title').textContent = this._name;
     bigImage.src = this._link;
     bigImage.alt = this._name;
-
   }
 
-  _handleCardLike() {
+    _checkLikes() {
+    if(this._likes.some((info) => {
+        return info._id === this.userId
+    })) {
+        this.buttonLikeCard.classList.toggle('button_is-active') 
+    }
+}
 
+  counterLikes(likes) {
+    this.likeNumber.textContent = likes.length;
   }
 
-  _handleLikeButton(likeItem) {
-    likeItem.classList.toggle('button_is-active');
-  };
 
-  checkLikes() {
-    this._likes.array.some((info) => {
-      return info.id === this.userId;
-    })
+  cardLike() {
+    this.buttonLikeCard.classList.add('button_is-active');
   }
 
-  _setLikes(arr) {
-    likeNumber.textContent = arr.length;
+  cardDisLike() {
+    this.buttonLikeCard.classList.remove('button_is-active');
   }
 
   _handleButtonDelete() {
@@ -64,28 +68,40 @@ export class Card {
 
   _addEventListeners() {
     const bigImage = this.element.querySelector('.card__image');
-    const likeCard = this.element.querySelector('.card__button-like')
-    const likeNumber = this.element.querySelector('.card__like-number');
+    //const buttonlikeCard = this.element.querySelector('.card__button-like')
+    //const likeNumber = this.element.querySelector('.card__like-number');
     const buttonDelete = this.element.querySelector('.card__button-delete');
     bigImage.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
 
-    likeCard.addEventListener('click', () => {
-      this._handleLikeButton(likeCard);
-      
-      });
+    this.buttonLikeCard.addEventListener('click', () => {
+      if(this.buttonLikeCard.classList.contains('button_is-active')) {
+      this._delLikes();
+      this.cardDisLike();
+      } else {
+        this._setLikes();
+        this.cardLike();
+      }
+    })
 
       buttonDelete.addEventListener('click', () => this._handleCardDelete(this._id, this.element));
     
   }
 
+
+
   generateCard() {
     this.element = this._getTemplate();
-    this.element.querySelector('.card__like-number').textContent = this._likes.length
+
+    this.likeNumber = this.element.querySelector('.card__like-number');
+    this.likeNumber.textContent = this._likes.length;
+
+    this.buttonLikeCard = this.element.querySelector('.card__button-like');
+
     this._createCard();
-    //this._setLikes();
     this._addEventListeners();
     this._checkForButtonDelete();
-    //console.log(this.element);
+    this._checkLikes();
+
     return this.element;
   }
 

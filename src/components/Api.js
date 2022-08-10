@@ -68,20 +68,20 @@ export class Api {
       .then(this._getJsonOrError)
   }
 
-  likeCard(card) {
-    return fetch(`${this._url}/cards/likes${id}`, {
+  likeCard(id) {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._getHeaders(),
-      body: JSON.stringify({ card }),
+      body: JSON.stringify({ id }),
     })
       .then(this._getJsonOrError)
   }
 
-  disLikeCard(card) {
-    return fetch(`${this._url}/cards/likes${id}`, {
+  disLikeCard(id) {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._getHeaders(),
-      body: JSON.stringify({ card }),
+      body: JSON.stringify({ id }),
     })
       .then(this._getJsonOrError)
   }

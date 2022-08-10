@@ -1,8 +1,7 @@
 import './index.css';
 
-import { initialCards } from '../components/cards.js';
+//import { initialCards } from '../components/cards.js';
 import { Card } from '../components/Card.js';
-//import { Avatar } from '../components/Avatar.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
@@ -26,6 +25,22 @@ const settings = {
 
 let userId = '';
 export const api = new Api(settings.url, settings.token);
+
+//промисы
+// Promise.all([
+//   api.getUserData(),
+//   api.getInitialCards(),
+// ])
+//   .then(([data, initialCards]) => {
+//     userInfo.setUserAvatar(data);
+//     userInfo.setUserId(data);
+//     userInfo.setUserInfo(data);
+
+//     section.renderItems(initialCards);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
 
 const formValidate = {};
 
@@ -199,7 +214,32 @@ const handleCardClick = (name, link) => {
 
 //создаем экземпляр карточки
 const createCard = (item) => {
-  const card = new Card(item, cardTemplate, handleCardClick, userId, handleCardDelete);
+  const card = new Card(item, cardTemplate, handleCardClick, userId, handleCardDelete, {
+    setLikes: () => {
+      api.likeCard(item._id)
+        .then((res) => {
+          card.counterLikes(res.likes);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      // .finally(() => {
+      //     card.cardLike();
+      // })
+    },
+    delLikes: () => {
+      api.disLikeCard(item._id)
+        .then((res) => {
+          card.counterLikes(res.likes);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      // .finally(() => {
+      //     card.cardDisLike();
+      // })
+    }
+  });
   const createdCard = card.generateCard();
   return createdCard;
 }
