@@ -13,9 +13,8 @@ export class Card {
     this._setLikes = setLikes;
     this._delLikes = delLikes;
 
-    //console.log(info.likes);
   }
-  
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._selector)
@@ -27,19 +26,19 @@ export class Card {
   }
 
   _createCard() {
-    const bigImage = this.element.querySelector('.card__image');
+    this.bigImage = this.element.querySelector('.card__image');
     this.element.querySelector('.card__title').textContent = this._name;
-    bigImage.src = this._link;
-    bigImage.alt = this._name;
+    this.bigImage.src = this._link;
+    this.bigImage.alt = this._name;
   }
 
-    _checkLikes() {
-    if(this._likes.some((info) => {
-        return info._id === this.userId
+  _checkLikes() {
+    if (this._likes.some((info) => {
+      return info._id === this.userId
     })) {
-        this.buttonLikeCard.classList.toggle('button_is-active') 
+      this.buttonLikeCard.classList.toggle('button_is-active')
     }
-}
+  }
 
   counterLikes(likes) {
     this.likeNumber.textContent = likes.length;
@@ -63,28 +62,28 @@ export class Card {
     if (this._ownerId !== "2b46b93d623a1f845b967594") {
       const buttonDelete = this.element.querySelector('.card__button-delete')
       buttonDelete.remove();
-      }
+    }
   }
 
   _addEventListeners() {
-    const bigImage = this.element.querySelector('.card__image');
+    this.bigImage = this.element.querySelector('.card__image');
     //const buttonlikeCard = this.element.querySelector('.card__button-like')
     //const likeNumber = this.element.querySelector('.card__like-number');
     const buttonDelete = this.element.querySelector('.card__button-delete');
-    bigImage.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
+    this.bigImage.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
 
     this.buttonLikeCard.addEventListener('click', () => {
-      if(this.buttonLikeCard.classList.contains('button_is-active')) {
-      this._delLikes();
-      this.cardDisLike();
+      if (this.buttonLikeCard.classList.contains('button_is-active')) {
+        this._delLikes();
+        this.cardDisLike();
       } else {
         this._setLikes();
         this.cardLike();
       }
     })
 
-      buttonDelete.addEventListener('click', () => this._handleCardDelete(this._id, this.element));
-    
+    buttonDelete.addEventListener('click', () => this._handleCardDelete(this._id, this.element));
+
   }
 
 
@@ -106,30 +105,3 @@ export class Card {
   }
 
 }
-
-// if (likeCard.classList.contains('button_is-active')) {// Number - преобразует в числа
-//   likeNumber.textContent = Number(likeNumber.textContent) + 1; //клик на активный лайк, = +1 лайк
-// }
-// else {
-//   likeNumber.textContent = Number(likeNumber.textContent) - 1; //клик на активный лайк, = +1 лайк
-// }
-
-// setLikeNumber(data) {
-//      return String(data.likes.length);
-//       }
-  
-//       _setLikeListener() {
-//           const like = this.element.querySelector(".photos__like");
-//           
-//           const likesNum = this.element.querySelector('.photos__like-number');
-//           
-//           like.addEventListener("click", () => {
-//               this._changeLikeStatus(like);
-//           if (like.classList.contains('photos__like_active')) {
-//               likesNum.textContent = Number(likesNum.textContent) + 1; //при нажатии активного лайка, добавляется 1 лайк
-//           }
-//           else {
-//               likesNum.textContent = Number(likesNum.textContent) - 1; //при повторном нажатии лайка, убирается 1 лайк. Number - преобразует в числа
-//           }
-//           }
-//       )}

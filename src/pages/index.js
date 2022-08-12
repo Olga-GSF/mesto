@@ -1,6 +1,5 @@
 import './index.css';
 
-//import { initialCards } from '../components/cards.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -27,20 +26,20 @@ let userId = '';
 export const api = new Api(settings.url, settings.token);
 
 //промисы
-// Promise.all([
-//   api.getUserData(),
-//   api.getInitialCards(),
-// ])
-//   .then(([data, initialCards]) => {
-//     userInfo.setUserAvatar(data);
-//     userInfo.setUserId(data);
-//     userInfo.setUserInfo(data);
+Promise.all([
+  api.getUserData(),
+  api.getInitialCards(),
+])
+  .then(([data, initialCards]) => {
+    userInfo.setUserAvatar(data);
+    userInfo.setUserId(data);
+    userInfo.setUserInfo(data);
 
-//     section.renderItems(initialCards);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   })
+    section.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 
 const formValidate = {};
 
@@ -70,18 +69,12 @@ const popupCardName = cardForm.getAttribute('name');
 
 const cardsItemsElement = document.querySelector('.cards__items')
 
-//const popupAvatar = document.querySelector('.profile__avatar')
-
-//const userInfo = new UserInfo({ titleElement, subtitleElement, popupAvatar });
 
 const userInfo = new UserInfo({
   titleSelector: '.profile__title',
   subtitleSelector: '.profile__subtitle',
   popupAvatar: '.profile__avatar'
 });
-
-
-//const buttonDelete = document.querySelector('.card__button-delete');
 
 //экземпляр попапа согласия sure
 const surePopup = '.popup_type_sure';
@@ -146,10 +139,7 @@ const popupProfileWithForm = new PopupWithForm({
     popupProfileWithForm.renderLoading(true);
     api.setUserData(data)
       .then((data) => {
-        userInfo.setUserInfo({
-          userName: data.name,
-          description: data.about
-        });
+        userInfo.setUserInfo(data);
         popupProfileWithForm.close();
       })
       .catch((err) => {
@@ -167,7 +157,7 @@ popupProfileWithForm.setEventListeners();
 buttonEditProfile.addEventListener('click', () => {
   const userInfoProfile = userInfo.getUserInfo();
   nameFieldElement.value = userInfoProfile.name;
-  descriptionFieldElement.value = userInfoProfile.description;
+  descriptionFieldElement.value = userInfoProfile.about;
   formValidate[popupProfileName].resetValidation();
   popupProfileWithForm.open();
 })
@@ -214,7 +204,7 @@ const handleCardClick = (name, link) => {
 
 //создаем экземпляр карточки
 const createCard = (item) => {
-  const card = new Card(item, cardTemplate, handleCardClick, userId, handleCardDelete, {
+  const card = new Card(item, cardTemplate, userId, handleCardClick, handleCardDelete, {
     setLikes: () => {
       api.likeCard(item._id)
         .then((res) => {
@@ -223,9 +213,9 @@ const createCard = (item) => {
         .catch((err) => {
           console.log(err);
         })
-      // .finally(() => {
-      //     card.cardLike();
-      // })
+        .finally(() => {
+          card.cardLike();
+        })
     },
     delLikes: () => {
       api.disLikeCard(item._id)
@@ -235,9 +225,9 @@ const createCard = (item) => {
         .catch((err) => {
           console.log(err);
         })
-      // .finally(() => {
-      //     card.cardDisLike();
-      // })
+        .finally(() => {
+          card.cardDisLike();
+        })
     }
   });
   const createdCard = card.generateCard();
@@ -253,29 +243,30 @@ const section = new Section({
   }
 }, cardsItemsElement);
 
-api.getInitialCards()
-  .then((items) => {
-    section.renderItems(items)
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+enableValidation();
 
-api.getUserData()
-  .then((data) => {
-    userInfo.setUserInfo({
-      userName: data.name,
-      description: data.about
-    })
-    userInfo.setUserAvatar(data)
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+// api.getInitialCards()
+//   .then((items) => {
+//     section.renderItems(items)
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+
+// api.getUserData()
+//   .then((data) => {
+//     userInfo.setUserInfo({
+//       userName: data.name,
+//       description: data.about
+//     })
+//     userInfo.setUserAvatar(data)
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
 
 //section.renderItems();
 
-enableValidation();
 
 // const card = document.querySelector(settings.cardList);
 
