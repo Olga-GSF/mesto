@@ -6,6 +6,7 @@ export class FormValidator {
     this.inactiveButtonClass = settings.inactiveButtonClass;
     this.inputErrorClass = settings.inputErrorClass;
     this.errorClass = settings.errorClass;
+    // console.log(this.errorClass);
 
     this.inputList = Array.from(this._formSelector.querySelectorAll(this.inputSelector));
     this.buttonElement = this._formSelector.querySelector(this.submitButtonSelector);
@@ -16,6 +17,7 @@ export class FormValidator {
 
     this.inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
+
     });
   }
 
@@ -29,6 +31,7 @@ export class FormValidator {
 
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
+    //console.log('errorElement: ', errorElement);
     inputElement.classList.add(this.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this.errorClass);

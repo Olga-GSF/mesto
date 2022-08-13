@@ -23,11 +23,11 @@ export class UserInfo {
   }
 
   getUserId() {
-    return this.id;
+    return this.userId;
   }
 
   setUserId(data) {
-    this.id = data._id
+    this.userId = data._id
   }
 
 }

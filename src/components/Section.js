@@ -13,7 +13,7 @@ export class Section {
     this._container.append(element);
   }
 
-  removeCard(element) {
+  removeElement(element) {
     element.remove();
   }
 

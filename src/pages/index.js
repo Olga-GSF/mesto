@@ -17,7 +17,6 @@ const settings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
 
-
   url: 'https://mesto.nomoreparties.co/v1/cohort-47',
   token: '216df983-7365-4312-a47e-9764ea1d99b1'
 };
@@ -41,6 +40,8 @@ Promise.all([
     console.log(err);
   })
 
+
+//Валидация
 const formValidate = {};
 
 const enableValidation = () => {
@@ -54,11 +55,9 @@ const enableValidation = () => {
 }
 
 const cardTemplate = '#card-template';
-
 const buttonEditProfile = document.querySelector('.profile__button-edit');
-//const titleElement = document.querySelector('.profile__title');
+
 const nameFieldElement = document.querySelector('.popup__input_name_firstname');
-//const subtitleElement = document.querySelector('.profile__subtitle');
 const descriptionFieldElement = document.querySelector('.popup__input_name_description');
 const profileForm = document.querySelector('.popup__form_place_edit');
 const popupProfileName = profileForm.getAttribute('name');
@@ -66,7 +65,6 @@ const popupProfileName = profileForm.getAttribute('name');
 const buttonAddCard = document.querySelector('.profile__button-add');
 const cardForm = document.querySelector('.popup__form_place_add');
 const popupCardName = cardForm.getAttribute('name');
-
 const cardsItemsElement = document.querySelector('.cards__items')
 
 
@@ -76,31 +74,9 @@ const userInfo = new UserInfo({
   popupAvatar: '.profile__avatar'
 });
 
-//экземпляр попапа согласия sure
-const surePopup = '.popup_type_sure';
-const popupWithConfirmation = new PopupWithConfirmation({
-  popupSelector: surePopup,
-  callbackSubmitForm: (id, element) => {
-    api.deleteCard(id)
-      .then(() => {
-        section.removeCard(element);
-        popupWithConfirmation.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-});
-popupWithConfirmation.setEventListeners();
-
-//открытие попапа согласия sure
-const handleCardDelete = (id, element) => {
-  popupWithConfirmation.open(id, element);
-}
-
 //создание экземпляра попапа Аватара
-const renewAvatar = document.querySelector('.profile__overlay')
 const avatarForm = document.querySelector('.popup__form_place_renew')
+const buttonRenewAvatar = document.querySelector('.profile__overlay')
 const popupAvatarName = avatarForm.getAttribute('name');
 const renewAvatarPopup = '.popup_type_renew-avatar';
 
@@ -125,10 +101,34 @@ const popupAvatarWithForm = new PopupWithForm({
 popupAvatarWithForm.setEventListeners();
 
 //открытие попапа Аватара
-renewAvatar.addEventListener('click', () => {
+buttonRenewAvatar.addEventListener('click', () => {
   popupAvatarWithForm.open();
   formValidate[popupAvatarName].resetValidation();
+
+  //console.log(buttonRenewAvatar);
 })
+
+//экземпляр попапа согласия sure
+const surePopup = '.popup_type_sure';
+const popupWithConfirmation = new PopupWithConfirmation({
+  popupSelector: surePopup,
+  callbackSubmitForm: (id, element) => {
+    api.deleteCard(id)
+      .then(() => {
+        section.removeElement(element);
+        popupWithConfirmation.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+});
+popupWithConfirmation.setEventListeners();
+
+//открытие попапа согласия sure
+const handleCardDelete = (id, element) => {
+  popupWithConfirmation.open(id, element);
+}
 
 //экземпляр попапа профиля
 const profilePopup = '.popup_type_edit-profile';
@@ -204,30 +204,33 @@ const handleCardClick = (name, link) => {
 
 //создаем экземпляр карточки
 const createCard = (item) => {
+  const userId = userInfo.getUserId();
   const card = new Card(item, cardTemplate, userId, handleCardClick, handleCardDelete, {
     setLikes: () => {
       api.likeCard(item._id)
         .then((res) => {
           card.counterLikes(res.likes);
+          card.cardLike();
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          card.cardLike();
-        })
+      // .finally(() => {
+      //   card.cardLike();
+      // })
     },
     delLikes: () => {
       api.disLikeCard(item._id)
         .then((res) => {
           card.counterLikes(res.likes);
+          card.cardDisLike();
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          card.cardDisLike();
-        })
+      // .finally(() => {
+      //   card.cardDisLike();
+      // })
     }
   });
   const createdCard = card.generateCard();
