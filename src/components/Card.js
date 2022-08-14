@@ -75,10 +75,10 @@ export class Card {
     this.buttonLikeCard.addEventListener('click', () => {
       if (this.buttonLikeCard.classList.contains('button_is-active')) {
         this._delLikes();
-        this.cardDisLike();
+        //this.cardDisLike();
       } else {
         this._setLikes();
-        this.cardLike();
+        //this.cardLike();
       }
     })
 
